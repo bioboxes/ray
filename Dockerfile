@@ -17,4 +17,4 @@ RUN python setup.py install
 ADD bbx/ /bbx
 RUN chmod a+x /bbx/run/default
 
-#ENTRYPOINT /bbx/run/default
+ENTRYPOINT /bbx/run/default
