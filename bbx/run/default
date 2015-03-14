@@ -1,0 +1,2 @@
+#!/bin/bash
+python /bbx/bin/yaml_parser.py -i /bbx/input/assembler.yaml -s /bbx/schema/schema.yaml
