@@ -4,7 +4,7 @@ Signature: `ray:[(Id,fastq)] -> fasta`
 
 ## Quickstart
 
-1. git clone https://github.com/pbelmann/ray.git
+1. git clone https://github.com/bioboxes/ray
 2. cd ray
 3. docker build -t ray .
 4. sudo docker run -v /path/to/your/assembler.yaml:/bbx/input/assembler.yaml -v /path/to/reads.fastq.gz:/home/input/reads.fastq.gz -v /path/to/output:/bbx/output ray
