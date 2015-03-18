@@ -3,7 +3,6 @@ __author__ = 'pbelmann'
 import argparse
 import yaml
 import Rx
-from pprint import pprint
 
 def validate_schema(input_yaml_path, schema_file):
     data = yaml.load(open(input_yaml_path))
