@@ -53,6 +53,7 @@ if __name__ == "__main__":
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         yaml_output = out_dir + "/out.yaml"
-        output_data = {'version': '0.9.0', 'arguments': [{ "value": "ray/Contigs.fasta" , "type" : "fasta"}]}
+        output_data = {'version': '0.9.0', 'arguments': [{ "value": "ray/Contigs.fasta" , "type" : "CONTIG"},
+                                                         { "value": "ray/Scaffolds.fasta" , "type" : "SCAFFOLD"}]}
         stream = open(yaml_output, 'w')
         yaml.dump(output_data,default_flow_style=False,stream=stream)
