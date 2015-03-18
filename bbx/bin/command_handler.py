@@ -30,8 +30,15 @@ if __name__ == "__main__":
     assembler = Assembler(**yaml.safe_load(f))
     f.close()
 
+    #check yaml
+    fastq = []
+    for argument in assembler.arguments:
+        if argument.has_key("fastq"):
+            fastq = argument["fastq"]
+    if(len(fastq)==0):
+        raise ValueError("YAML is not in a valid format. Please check the definition on bioboxes.")
+
     #run ray
-    fastq = assembler.arguments["fastq"]
     output = output_path + "/ray"
     input_type = ""
     if(fastq[0].get("type") == "paired"):
