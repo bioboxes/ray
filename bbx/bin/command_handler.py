@@ -21,7 +21,7 @@ if __name__ == "__main__":
                         help='Output path')
     args = parser.parse_args()
 
-    #get input files
+    # get input files
     input_yaml_path = ""
     output_path = ""
     if hasattr(args, 'i'):
@@ -52,7 +52,7 @@ if __name__ == "__main__":
         elif (fastq.get("type") == "single"):
             input_type = "-s"
         command = command + input_type + " " + bbx_input_dir + fastq.get(
-        "path") + " -k 31 -o " + output
+            "path") + " -k 31 -o " + output
 
     exit = os.system(command)
 
@@ -61,7 +61,9 @@ if __name__ == "__main__":
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
         yaml_output = out_dir + "/out.yaml"
-        output_data = {'version': '0.9.0', 'arguments': [{"value": "ray/Contigs.fasta", "type": "contig"},
-                                                         {"value": "ray/Scaffolds.fasta", "type": "scaffold"}]}
+        output_data = {'version': '0.9.0', 'arguments': [
+            {"fasta": [
+                {"value": "ray/Contigs.fasta", "type": "contig" , "id" : "1"},
+                {"value": "ray/Scaffolds.fasta", "type": "scaffold", "id": "2"}]}]}
         stream = open(yaml_output, 'w')
         yaml.dump(output_data, default_flow_style=False, stream=stream)
