@@ -46,12 +46,12 @@ if __name__ == "__main__":
     output = output_path + "/ray"
     input_type = ""
     command = "mpiexec -n 8 /opt/bin/Ray "
-    for(fastq in fastqs):
-        if (fastqs[0].get("type") == "paired"):
+    for fastq in fastqs:
+        if (fastq.get("type") == "paired"):
             input_type = "-i"
-        elif (fastqs[0].get("type") == "single"):
+        elif (fastq.get("type") == "single"):
             input_type = "-s"
-        command = command + input_type + " " + bbx_input_dir + fastqs[0].get(
+        command = command + input_type + " " + bbx_input_dir + fastq.get(
         "path") + " -k 31 -o " + output
 
     exit = os.system(command)
