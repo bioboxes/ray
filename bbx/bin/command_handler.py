@@ -35,24 +35,27 @@ if __name__ == "__main__":
     f.close()
 
     #check yaml
-    fastq = []
+    fastqs = []
     for argument in assembler.arguments:
         if argument.has_key("fastq"):
-            fastq = argument["fastq"]
-    if (len(fastq) == 0):
+            fastqs = argument["fastq"]
+    if (len(fastqs) == 0):
         raise ValueError("YAML is not in a valid format. Please check the definition on bioboxes.")
 
     #run ray
     output = output_path + "/ray"
     input_type = ""
-    if (fastq[0].get("type") == "paired"):
-        input_type = "-i"
-    elif (fastq[0].get("type") == "single"):
-        input_type = "-s"
-
-    command = "mpiexec -n 8 /opt/bin/Ray " + input_type + " " + bbx_input_dir + fastq[0].get(
+    command = "mpiexec -n 8 /opt/bin/Ray "
+    for(fastq in fastqs):
+        if (fastqs[0].get("type") == "paired"):
+            input_type = "-i"
+        elif (fastqs[0].get("type") == "single"):
+            input_type = "-s"
+        command = command + input_type + " " + bbx_input_dir + fastqs[0].get(
         "path") + " -k 31 -o " + output
+
     exit = os.system(command)
+
     if (exit == 0):
         out_dir = output_path + "/bbx"
         if not os.path.exists(out_dir):
