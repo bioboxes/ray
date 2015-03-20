@@ -52,7 +52,7 @@ if __name__ == "__main__":
         elif (fastq.get("type") == "single"):
             input_type = "-s"
         command = command + input_type + " " + bbx_input_dir + fastq.get(
-            "path") + " -k 31 -o " + output
+            "value") + " -k 31 -o " + output
 
     exit = os.system(command)
 
