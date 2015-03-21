@@ -19,7 +19,7 @@ def validate_schema(input_yaml_path, schema_file):
     json_data_schema = json.load(open(schema_file))
     error = best_match(Draft4Validator(json_data_schema).iter_errors(json_data_in))
     if(error):
-        sys.exit("Error parsing: '/bbx/input/assembler.yaml'.\n" + error.message)
+        sys.exit("Error parsing: '/bbx/input/assembler.yaml'.\n" + error.message[1:])
 
 if __name__ == "__main__":
     #Parse arguments
