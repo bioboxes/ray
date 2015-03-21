@@ -9,16 +9,11 @@ fi
 #check if file is empty
 if [ ! -s /bbx/input/assembler.yaml ]
 then
-    printf 'Unable to parse: "/bbx/input/assembler.yaml".' >&2 ; exit 1;
-fi
-
-if [ ! -f /bbx/input/assembler.yaml ]
-then
-    printf 'No input data found at: "/bbx/input/assembler.yaml".' >&2 ; exit 1;
+    printf 'Unable to parse: "/bbx/input/assembler.yaml1".' >&2 ; exit 1;
 fi
 
 #validate yaml
-python /bbx/bin/schema_validator.py -i /bbx/input/assembler.yaml -s /bbx/schema/schema.yaml
+python /bbx/bin/schema_validator.py -i /bbx/input/assembler.yaml -s /bbx/schema/schema.json
 
 #if valid yaml run ray command
 if [ $? -eq  0 ]
