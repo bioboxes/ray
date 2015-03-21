@@ -9,7 +9,7 @@ fi
 #check if file is empty
 if [ ! -s /bbx/input/assembler.yaml ]
 then
-    printf 'Unable to parse: "/bbx/input/assembler.yaml1".' >&2 ; exit 1;
+    printf 'Unable to parse: "/bbx/input/assembler.yaml".' >&2 ; exit 1;
 fi
 
 #validate yaml
@@ -19,4 +19,6 @@ python /bbx/bin/schema_validator.py -i /bbx/input/assembler.yaml -s /bbx/schema/
 if [ $? -eq  0 ]
 then	
 	python /bbx/bin/command_handler.py -i /bbx/input/assembler.yaml -o /bbx/output
+else
+    exit 1;
 fi
