@@ -13,14 +13,14 @@ def validate_schema(input_yaml_path, schema_file):
     try:
        json_data_in = yaml.load(file(input_yaml_path, 'r'))
     except yaml.YAMLError, exc:
-       sys.stderr.write("Error parsing: '/bbx/input/assembler.yaml.'.\n" +
+       sys.stderr.write("Error parsing: \"/bbx/input/assembler.yaml\".\n" +
                                          "This file is not valid YAML.")
        return 1
 
     json_data_schema = json.load(open(schema_file))
     error = best_match(Draft4Validator(json_data_schema).iter_errors(json_data_in))
     if(error):
-        sys.stderr.write("Error parsing: '/bbx/input/assembler.yaml'.\n" + error.message[1:])
+        sys.stderr.write("Error parsing: \"/bbx/input/assembler.yaml\".\n" + error.message)
         return 1
     return 0
 
