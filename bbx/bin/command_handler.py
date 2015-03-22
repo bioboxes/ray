@@ -12,7 +12,7 @@ class Assembler:
 
 if __name__ == "__main__":
 
-    bbx_input_dir = "/bbx/input/"
+    bbx_input_dir = "/bbx/input"
     # Parse arguments
     parser = argparse.ArgumentParser(description='Parses input yaml')
     parser.add_argument('-i', '--input_yaml', dest='i', nargs=1,
@@ -63,7 +63,7 @@ if __name__ == "__main__":
         yaml_output = out_dir + "/out.yaml"
         output_data = {'version': '0.9.0', 'arguments': [
             {"fasta": [
-                {"value": "ray/Contigs.fasta", "type": "contig" , "id" : "1"},
-                {"value": "ray/Scaffolds.fasta", "type": "scaffold", "id": "2"}]}]}
+                {"value": "/ray/Contigs.fasta", "type": "contig" , "id" : "1"},
+                {"value": "/ray/Scaffolds.fasta", "type": "scaffold", "id": "2"}]}]}
         stream = open(yaml_output, 'w')
         yaml.dump(output_data, default_flow_style=False, stream=stream)
