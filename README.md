@@ -7,7 +7,7 @@ Signature: `ray:[fastq A] -> contigs B, scaffolds C`
 1. git clone https://github.com/bioboxes/ray
 2. cd ray
 3. docker build -t ray .
-4. sudo docker run -v /path/to/your/assembler.yaml:/bbx/input/assembler.yaml -v /path/to/reads.fastq.gz:/bbx/input/test1/reads.fastq.gz -v /path/to/output:/bbx/output ray
+4. sudo docker run -v /path/to/your/assembler.yaml:/bbx/input/assembler.yaml -v /path/to/reads.fastq.gz:/bbx/input/test1/reads.fastq.gz -v /path/to/output:/bbx/output ray default
 
 #### Example assembler.yaml:
 
@@ -29,6 +29,7 @@ arguments:
     "/test1/reads.fastq.gz" in the yaml file.
 * mount your output directory to /bbx/output
 * mount your assembler.yaml to /bbx/input/assembler.yaml
+* "default" task at the end of your docker run command
 
 ####!Note this is not meant for production, it is a showcase for
 * checking a provided yaml against a rx schema

@@ -18,5 +18,4 @@ ADD bbx/ /bbx
 RUN apt-get install -y python-pip
 RUN pip install  jsonschema
 RUN chmod a+x /bbx/run/default
-
-ENTRYPOINT /bbx/run/default
+ENV PATH /bbx/run:$PATH
