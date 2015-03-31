@@ -9,7 +9,7 @@ Signature: `ray:[fastq A] -> contigs B, scaffolds C`
 3. docker build -t ray .
 4. sudo docker run -v /path/to/your/assembler.yaml:/bbx/input/biobox.yaml -v /path/to/reads.fastq.gz:/bbx/input/test1/reads.fastq.gz -v /path/to/output:/bbx/output ray default
 
-#### Example assembler.yaml:
+#### Example biobox.yaml:
 
 ```YAML
 ---
@@ -24,7 +24,7 @@ arguments:
 ## Required
 * biobox.yaml : Please see https://github.com/bioboxes/rfc/issues/90 for current definition.
 * gzipped reads with the path provided in biobox.yaml
-* mount your input files to /bbx/input. The path provided in assembler.yaml is relative to /bbx/input
+* mount your input files to /bbx/input. The path provided in biobox.yaml is relative to /bbx/input
   * Example: When you mount your file to /bbx/input/test1/reads.fastq.gz then you have to provide the path
     "/test1/reads.fastq.gz" in the yaml file.
 * mount your output directory to /bbx/output
