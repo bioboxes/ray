@@ -13,7 +13,7 @@ then
 fi
 
 #validate yaml
-/bbx/bin/biobox-validator/validate-input --schema=/bbx/schema/schema.yaml --input=/bbx/input/assembler.yaml
+/bbx/bin/biobox-validator/validate-input --schema=/bbx/schema/schema.yaml --input=/bbx/input/biobox.yaml
 
 #if valid yaml run ray command
 if [ $? -eq  0 ]
