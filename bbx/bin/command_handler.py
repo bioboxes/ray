@@ -60,7 +60,7 @@ if __name__ == "__main__":
         out_dir = output_path + "/bbx"
         if not os.path.exists(out_dir):
             os.makedirs(out_dir)
-        yaml_output = out_dir + "/output.yaml"
+        yaml_output = out_dir + "/biobox.yaml"
         output_data = {'version': '0.9.0', 'arguments': [
             {"fasta": [
                 {"value": "/ray/Contigs.fasta", "type": "contig" , "id" : "1"},
