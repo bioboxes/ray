@@ -3,7 +3,7 @@ __author__ = 'pbelmann'
 import argparse
 import yaml
 import os
-
+import sys
 
 class Assembler:
     def __init__(self, **entries):
@@ -12,7 +12,6 @@ class Assembler:
 
 if __name__ == "__main__":
 
-    bbx_input_dir = "/bbx/input"
     # Parse arguments
     parser = argparse.ArgumentParser(description='Parses input yaml')
     parser.add_argument('-i', '--input_yaml', dest='i', nargs=1,
@@ -51,7 +50,7 @@ if __name__ == "__main__":
             input_type = "-i"
         elif (fastq.get("type") == "single"):
             input_type = "-s"
-        command = command + input_type + " " + bbx_input_dir + fastq.get(
+        command = command + input_type + " " + fastq.get(
             "value") + " -k 31 -o " + output
 
     exit = os.system(command)
@@ -67,3 +66,5 @@ if __name__ == "__main__":
                 {"value": "/ray/Scaffolds.fasta", "type": "scaffold", "id": "2"}]}]}
         stream = open(yaml_output, 'w')
         yaml.dump(output_data, default_flow_style=False, stream=stream)
+    else:
+        sys.exit(1)
