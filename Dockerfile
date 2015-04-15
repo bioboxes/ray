@@ -12,12 +12,12 @@ RUN chmod a+x /bbx/run/default
 ENV PATH /bbx/run:$PATH
 
 #load the input-validator
-ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-input
-ENV VERSION  validate-input-current.tar.xz
+ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION  0.x.y
 RUN apt-get install -y wget
 RUN apt-get install -y xz-utils
 RUN mkdir -p /bbx/bin/biobox-validator
-RUN wget --quiet --output-document - ${BASE_URL}/${VERSION} |  tar xJf - --directory /bbx/bin/biobox-validator  --strip-components=1
+RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz |  tar xJf - --directory /bbx/bin/biobox-validator  --strip-components=1
 
 #install python 
 RUN apt-get install python
