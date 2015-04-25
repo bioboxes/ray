@@ -1,0 +1,1 @@
+default:  mpiexec -n 8 /opt/bin/Ray $FASTQ_TYPE -k 31 -o $OUTPUT

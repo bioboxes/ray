@@ -22,13 +22,8 @@ arguments:
 ```
 
 ## Required
-* biobox.yaml : Please see https://github.com/bioboxes/rfc/issues/90 for current definition.
 * gzipped reads with the path provided in biobox.yaml
 * mount your input files to /bbx/input.
 * mount your output directory to /bbx/output
 * mount your .yaml to /bbx/input/biobox.yaml
 * "default" task at the end of your docker run command
-
-####!Note this is not meant for production, it is a showcase for
-* checking a provided yaml against a json-schema
-* provide different parameters for an assembler (paired,single)
