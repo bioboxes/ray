@@ -26,7 +26,8 @@ ADD tasks /
 #load the input-validator
 ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
 ENV VERSION  0.x.y
-RUN apt-get install -y wget
 RUN apt-get install -y xz-utils
 RUN mkdir -p /bbx/bin/biobox-validator
 RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz |  tar xJf - --directory /bbx/bin/biobox-validator  --strip-components=1
+
+ENTRYPOINT ["/usr/local/bin/run"]
