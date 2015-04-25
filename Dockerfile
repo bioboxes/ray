@@ -6,10 +6,22 @@ RUN apt-get update
 RUN apt-get install -y openssh-server openmpi-bin
 ADD bin/Ray /opt/bin/Ray
 
-#add parser and run command 
-ADD bbx/ /bbx
-RUN chmod a+x /bbx/run/default
-ENV PATH /bbx/run:$PATH
+# Locations for biobox validator
+ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
+ENV VERSION   0.x.y
+ENV VALIDATOR /bbx/validator/
+RUN sudo mkdir -p  ${VALIDATOR} && sudo chmod -R a+wx  /bbx 
+
+# install yaml2json and jq tools
+ENV CONVERT https://github.com/bronze1man/yaml2json/raw/master/builds/linux_386/yaml2json
+RUN cd /usr/local/bin && sudo wget --quiet ${CONVERT} && sudo chmod a+x /usr/local/bin/yaml2json
+RUN apt-get install jq
+
+# add schema, tasks, run scripts
+ADD run.sh /usr/local/bin/run
+RUN chmod a+x /usr/local/bin/run 
+ADD schema.yaml ${VALIDATOR}
+ADD tasks /
 
 #load the input-validator
 ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
@@ -18,10 +30,3 @@ RUN apt-get install -y wget
 RUN apt-get install -y xz-utils
 RUN mkdir -p /bbx/bin/biobox-validator
 RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz |  tar xJf - --directory /bbx/bin/biobox-validator  --strip-components=1
-
-#install python 
-RUN apt-get install python
-RUN wget -O /opt/bin/PyYAML-3.11.tar.gz http://pyyaml.org/download/pyyaml/PyYAML-3.11.tar.gz
-RUN tar xzvf /opt/bin/PyYAML-3.11.tar.gz -C /opt/bin
-WORKDIR /opt/bin/PyYAML-3.11
-RUN python setup.py install
