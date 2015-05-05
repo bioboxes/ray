@@ -4,7 +4,7 @@ set -o errexit
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
-OUTPUT=/bbx/output
+OUTPUT=/bbx/output/bbx
 TASK=$1
 
 #validate yaml

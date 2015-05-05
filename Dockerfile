@@ -19,7 +19,6 @@ RUN apt-get install jq
 # add schema, tasks, run scripts
 ADD run.sh /usr/local/bin/run
 RUN chmod a+x /usr/local/bin/run 
-ADD schema.yaml ${VALIDATOR}
 ADD Taskfile /
 
 #load the input-validator
@@ -32,7 +31,7 @@ RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file
 
 # download the assembler schema
 RUN wget \
-    --output-document /schema.yaml \
+    --output-document ${VALIDATOR}/schema.yaml \
     https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
 
 ENTRYPOINT ["/usr/local/bin/run"]
