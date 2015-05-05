@@ -3,8 +3,7 @@ MAINTAINER Bioboxes
 
 #install ray
 RUN apt-get update
-RUN apt-get install -y openssh-server openmpi-bin
-ADD bin/Ray /opt/bin/Ray
+RUN apt-get install -y wget Ray
 
 # Locations for biobox validator
 ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
@@ -28,6 +27,7 @@ ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-f
 ENV VERSION  0.x.y
 RUN apt-get install -y xz-utils
 RUN mkdir -p /bbx/bin/biobox-validator
-RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz |  tar xJf - --directory /bbx/bin/biobox-validator  --strip-components=1
+RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
+         |  tar xJf - --directory $VALIDATOR  --strip-components=1
 
 ENTRYPOINT ["/usr/local/bin/run"]
