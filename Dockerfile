@@ -3,7 +3,7 @@ MAINTAINER Bioboxes
 
 #install ray
 RUN apt-get update
-RUN apt-get install -y wget ca-certificates openssh-server openmpi-bin Ray
+RUN apt-get install -y wget xz-utils ca-certificates openssh-server openmpi-bin Ray
 
 # Locations for biobox validator
 ENV BASE_URL  https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
