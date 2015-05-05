@@ -15,12 +15,12 @@ READS=$(sudo /usr/local/bin/yaml2json < ${INPUT} \
         | jq --raw-output '.arguments[] | select(has("fastq")) | .fastq[].value ')
 
 #get fastq entries
-FASTQS=$(sudo /usr/local/bin/yaml2json < ${INPUT} | jq --raw-output '.arguments[] | select(has("fastq")) | [.fastq[] | {value,type}]')
+FASTQS=$(sudo /usr/local/bin/yaml2json < ${INPUT} | jq --raw-output '.arguments[] | select(has("fastq")) | [.fastq[] | {value,type}] ' | tr '\n' ' ' )
 
 #get length of fastq array
 LENGTH=$( echo "$FASTQS" | jq  --raw-output 'length')
 
-TMP_DIR=$(mktemp -d)
+TMP_DIR="$(mktemp -d)/ray"
 
 FASTQ_TYPE=""
 
