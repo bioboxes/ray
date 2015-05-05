@@ -20,7 +20,7 @@ RUN apt-get install jq
 ADD run.sh /usr/local/bin/run
 RUN chmod a+x /usr/local/bin/run 
 ADD schema.yaml ${VALIDATOR}
-ADD tasks /
+ADD Taskfile /
 
 #load the input-validator
 ENV BASE_URL https://s3-us-west-1.amazonaws.com/bioboxes-tools/validate-biobox-file
