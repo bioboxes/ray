@@ -4,12 +4,11 @@ set -o errexit
 set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
-OUTPUT_YAML=/bbx/output/bbx
-OUTPUT=/bbx/output/ray
+OUTPUT=/bbx/output
 TASK=$1
 
 #validate yaml
-/bbx/bin/biobox-validator/validate-biobox-file --schema=${VALIDATOR}schema.yaml --input=/bbx/input/biobox.yaml
+${VALIDATOR}/validate-biobox-file --schema=${VALIDATOR}schema.yaml --input=${INPUT}
 
 # Parse the read locations from this file
 READS=$(sudo /usr/local/bin/yaml2json < ${INPUT} \
@@ -25,6 +24,8 @@ TMP_DIR=$(mktemp -d)
 
 FASTQ_TYPE=""
 
+mkdir -p $OUTPUT
+
 for ((COUNTER=0; COUNTER <$LENGTH; COUNTER++))
 do
          FASTQ_GZ=$( echo "$FASTQS" | jq --arg COUNTER "$COUNTER"  --raw-output '.['$COUNTER'].value')
@@ -38,7 +39,7 @@ do
 done
 
 # Run the given task
-CMD=$(egrep ^${TASK}: /tasks | cut -f 2 -d ':')
+CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
 if [[ -z ${CMD} ]]; then
   echo "Abort, no task found for '${TASK}'."
   exit 1
@@ -46,15 +47,17 @@ fi
 
 eval $CMD
 
-mkdir -p $OUTPUT_YAML
-cat << EOF > ${OUTPUT_YAML}/biobox.yaml
+mv ${TMP_DIR}/Contigs.fasta ${OUTPUT}
+mv ${TMP_DIR}/Scaffolds.fasta ${OUTPUT}
+
+cat << EOF > ${OUTPUT}/biobox.yaml
 version: 0.9.0
 arguments:
   - fasta:
     - id: 1
-      value: /ray/Contigs.fasta
+      value: Contigs.fasta
       type: contig
     - id: 2
-      value: /ray/Scaffolds.fasta
+      value: Scaffolds.fasta
       type: scaffold
 EOF
