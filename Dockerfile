@@ -30,4 +30,9 @@ RUN mkdir -p /bbx/bin/biobox-validator
 RUN wget --quiet --output-document - ${BASE_URL}/${VERSION}/validate-biobox-file.tar.xz \
          |  tar xJf - --directory $VALIDATOR  --strip-components=1
 
+# download the assembler schema
+RUN wget \
+    --output-document /schema.yaml \
+    https://raw.githubusercontent.com/bioboxes/rfc/master/container/short-read-assembler/input_schema.yaml
+
 ENTRYPOINT ["/usr/local/bin/run"]
