@@ -5,6 +5,7 @@ set -o nounset
 
 INPUT=/bbx/input/biobox.yaml
 OUTPUT=/bbx/output
+METADATA=/bbx/metadata
 TASK=$1
 
 #validate yaml
@@ -43,6 +44,11 @@ CMD=$(egrep ^${TASK}: /Taskfile | cut -f 2 -d ':')
 if [[ -z ${CMD} ]]; then
   echo "Abort, no task found for '${TASK}'."
   exit 1
+fi
+
+# if /bbx/metadata mounted create log.txt
+if [ -d "$METADATA" ]; then
+  CMD="($CMD) >& $METADATA/log.txt"
 fi
 
 eval $CMD
